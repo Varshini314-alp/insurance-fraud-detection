@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Insurance Claim Fraud Detection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #163b65;
+            font-size: 25px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #104e80;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 6px;
+            background: #e8f3ff;
+            color: #163b65;
+            overflow-wrap: anywhere;
+        }
+
+        .error {
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 6px;
+            background: #fff0f0;
+            color: #a32121;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Insurance Claim Fraud Detection</h1>
+
+        <p>
+            Enter the claim details below to obtain a
+            machine learning prediction.
+        </p>
+
+        <form action="/predict" method="post">
+
+            <label for="claim_amount">Claim Amount</label>
+            <input
+                type="number"
+                id="claim_amount"
+                name="claim_amount"
+                min="0"
+                step="0.01"
+                required
+            >
+
+            <label for="age">Customer Age</label>
+            <input
+                type="number"
+                id="age"
+                name="age"
+                min="0"
+                required
+            >
+
+            <label for="months_as_customer">
+                Months as Customer
+            </label>
+            <input
+                type="number"
+                id="months_as_customer"
+                name="months_as_customer"
+                min="0"
+                required
+            >
+
+            <button type="submit">
+                Predict Claim
+            </button>
+
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <h2>Prediction Result</h2>
+                <p>{{ result }}</p>
+                <p>
+                    This is a model prediction, not confirmation
+                    of insurance fraud.
+                </p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <h2>Prediction Error</h2>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
